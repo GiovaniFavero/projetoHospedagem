@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"   
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>
+            <ui:insert name="titulo"/>
+        </title>
+        <h:outputStylesheet library="css" name="estilos.css" />
+    </h:head>
+    
+    <h:body>
+        <div id="cabecalho">
+            <h1>Sistema de Hospedagens</h1>
+        </div>
+        <div id="menu">
+            <h:form>
+                <p:menubar>
+                    <p:submenu label="Vagas" icon="">
+                        <p:submenu label="Pesquisar por cidade"></p:submenu>
+                        <p:submenu label="Pesquisar por periodo de estadia"></p:submenu>
+                        <p:submenu label="Pesquisar por avaliação mínima"></p:submenu>
+                        
+                    </p:submenu>
+                    
+                    <p:menuitem value="Entrar/Cadastrar-se">
+                        
+                    </p:menuitem>
+                    
+                    <p:menuitem>
+                        <p:inputText style="margin-right: 10px" placeholder="Buscar por ofertas"/>
+                    </p:menuitem>
+                                        
+                </p:menubar>
+            </h:form>
+        </div>
+        <div id="conteudo">
+            <ui:insert name="conteudo"/>
+        </div>
+        
+        <div id="rodape">
+            <h3>Desenvolvido por Esley e Giovane</h3>
+        </div>
+    </h:body>
+</html>

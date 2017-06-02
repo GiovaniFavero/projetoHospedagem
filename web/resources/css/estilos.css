@@ -1,0 +1,45 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 02/06/2017, 17:59:15
+    Author     : Esley
+*/
+
+
+#cabecalho {
+    
+    border: 1px solid black;
+    height: 100px;
+    width: 100%;
+    text-align: left;
+    background-color: gainsboro;
+    
+}
+
+#menu {
+    
+    border: 1px solid black;
+    height: 40px;
+    width: 100%;
+    
+}
+
+#conteudo {
+    
+    border: 1px solid black;
+    height: 800px;
+    width: 100%;
+    
+}
+
+#rodape {
+    
+    border: 1px solid black;
+    height: 50px;
+    width: 100%;
+    background-color: gainsboro;
+    
+}
