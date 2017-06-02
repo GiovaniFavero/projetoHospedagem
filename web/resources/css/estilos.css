@@ -16,6 +16,9 @@ and open the template in the editor.
     width: 100%;
     text-align: left;
     background-color: gainsboro;
+    border-collapse: 10px;
+    padding-left: 15px;
+    padding-top: 5px;    
     
 }
 
@@ -24,14 +27,19 @@ and open the template in the editor.
     border: 1px solid black;
     height: 40px;
     width: 100%;
+    border-collapse: 10px;
+    
     
 }
 
 #conteudo {
     
     border: 1px solid black;
-    height: 800px;
+    height: auto;
+    min-height: 600px;
     width: 100%;
+    border-collapse: 10px;
+    padding-top: 20px;
     
 }
 
@@ -41,5 +49,5 @@ and open the template in the editor.
     height: 50px;
     width: 100%;
     background-color: gainsboro;
-    
+    border-collapse: 10px;
 }

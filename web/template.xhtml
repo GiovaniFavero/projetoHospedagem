@@ -18,8 +18,8 @@ and open the template in the editor.
     </h:head>
     
     <h:body>
-        <div id="cabecalho">
-            <h1>Sistema de Hospedagens</h1>
+        <div id="cabecalho" >
+            <a href="index.xhtml"><h1>Sistema de Hospedagens</h1></a>
         </div>
         <div id="menu">
             <h:form>
@@ -31,7 +31,7 @@ and open the template in the editor.
                         
                     </p:submenu>
                     
-                    <p:menuitem value="Entrar/Cadastrar-se">
+                    <p:menuitem value="Entrar/Cadastrar-se" outcome="cadastroPessoa.xhtml" >
                         
                     </p:menuitem>
                     
@@ -43,6 +43,7 @@ and open the template in the editor.
             </h:form>
         </div>
         <div id="conteudo">
+            
             <ui:insert name="conteudo"/>
         </div>
         
