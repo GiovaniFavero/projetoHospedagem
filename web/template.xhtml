@@ -23,20 +23,22 @@ and open the template in the editor.
         </div>
         <div id="menu">
             <h:form>
-                <p:menubar>
-                    <p:submenu label="Vagas" icon="">
+                <p:menubar id="barraMenu" style="text-align:center !important;">
+                    <p:submenu label="Vagas" icon="ui-icon-home">
                         <p:submenu label="Pesquisar por cidade"></p:submenu>
                         <p:submenu label="Pesquisar por periodo de estadia"></p:submenu>
                         <p:submenu label="Pesquisar por avaliação mínima"></p:submenu>
                         
                     </p:submenu>
                     
-                    <p:menuitem value="Entrar/Cadastrar-se" outcome="cadastroPessoa.xhtml" >
+                    <p:menuitem value="Cadastrar Vaga" icon="ui-icon-pin-s" outcome="cadastroVaga.xhtml"/>
+                    
+                    <p:menuitem value="Entrar/Cadastrar-se" icon="ui-icon-key" outcome="telaLogin.xhtml" >
                         
                     </p:menuitem>
                     
                     <p:menuitem>
-                        <p:inputText style="margin-right: 10px" placeholder="Buscar por ofertas"/>
+                        <p:inputText  style="float: right" size="30" placeholder="Buscar por ofertas"/>
                     </p:menuitem>
                                         
                 </p:menubar>

@@ -23,7 +23,9 @@ and open the template in the editor.
 }
 
 #menu {
-    
+    margin-left: auto;
+    text-align: center;
+    align-items: center;
     border: 1px solid black;
     height: 40px;
     width: 100%;
@@ -51,3 +53,6 @@ and open the template in the editor.
     background-color: gainsboro;
     border-collapse: 10px;
 }
+
+
+

@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet library="css" name="estilos.css" />
+    </h:head>
+    <h:body>
+        
+        <ui:composition template="template.xhtml">
+
+            <ui:define name="titulo">Cadastro Vaga</ui:define>
+
+
+
+            <ui:define name="conteudo" >
+                <h:form>
+                    
+                    <p:panelGrid columns="3">
+                        <p:outputLabel value="Titulo"/>
+                        <p:inputText id="tituloVaga" size="110" required="true" requiredMessage="Campo Obrigatório"/>
+                        <p:message for="tituloVaga"/>
+                        
+                        <p:outputLabel value="Descrição"/>
+                        <p:inputText id="descVaga" size="110" required="true" requiredMessage="Campo Obrigatório"/>
+                        <p:message for="descVaga"/>
+                        
+                        <p:outputLabel value="Valor diário"/>
+                        <p:inputNumber id="valorVaga" size="15" required="true" requiredMessage="Campo Obrigatório"/>
+                        <p:message for="valorVaga"/>
+                        
+                        <p:outputLabel value="Capacidade"/>
+                        <p:inputNumber id="capVaga" size="15" required="true" requiredMessage="Campo Obrigatório" placeholder="Nr. de pessoas"/>
+                        <p:message for="capVaga"/>
+                        
+                        <p:outputLabel value="Serviços inclusos"/>
+                        <p:selectManyCheckbox id="servicosVaga">
+                        <f:selectItem itemValue="1" itemLabel="Wifi"/>
+                        <f:selectItem itemValue="2" itemLabel="TV"/>
+                        <f:selectItem itemValue="3" itemLabel="Café da Manhã"/>
+                        <f:selectItem itemValue="4" itemLabel="Limpeza"/>
+                        <f:selectItem itemValue="5" itemLabel="Estacionamento"/>
+                        <f:selectItem itemValue="6" itemLabel="Serviço de quarto"/>
+                        <f:selectItem itemValue="7" itemLabel="Lavanderia"/>
+                        </p:selectManyCheckbox >
+                        <p:message for="servicosVaga"/>
+                        
+                        <p:outputLabel value="Regras"/>
+                        <p:inputText id="regrasVaga" size="110" required="true" requiredMessage="Campo Obrigatório"/>
+                        <p:message for="regrasVaga"/>
+                                                
+                        <p:button value="Salvar"/>
+                    </p:panelGrid>
+
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+    </h:body>
+</html>
+

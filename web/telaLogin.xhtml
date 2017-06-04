@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet library="css" name="estilos.css" />
+    </h:head>
+    <h:body>
+
+        <ui:composition template="template.xhtml">
+
+            <ui:define name="titulo">Login</ui:define>
+
+            <ui:define name="conteudo" >
+                <div id="login">
+                    <h:form>
+                        <p:panelGrid columns="3">
+                            <p:outputLabel value="E-mail"/>
+                            <p:inputText id="emailPessoa" required="true" requiredMessage="Campo Obrigatório"/>
+                            <p:message for="emailPessoa"/>
+                            <p:outputLabel value="Senha"/>
+                            <p:password id="senhaPessoa" value="Senha" required="true" requiredMessage="Senha Obrigatória"/>
+                            <p:message for="senhaPessoa"/>
+                            <p:commandButton value="Entrar"/>
+                        </p:panelGrid>
+                        <p:outputLabel value="Ainda não é cadastrado?"/>
+                        <h:outputLink value="cadastroPessoa.xhtml">Clique Aqui</h:outputLink> 
+                        
+                    </h:form>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+    </h:body>
+</html>
+
