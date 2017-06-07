@@ -21,7 +21,7 @@
                     
                     <p:panelGrid columns="3">
                         <p:outputLabel value="Nome"/>
-                        <p:inputText id="nomePessoa" required="true" requiredMessage="Campo Obrigatório"/>
+                        <p:inputText id="nomePessoa" value="#{PessoaBean.pessoa.nome}" required="true" requiredMessage="Campo Obrigatório"/>
                         <p:message for="nomePessoa"/>
                         
                         <p:outputLabel value="Data de Nascimento"/>
