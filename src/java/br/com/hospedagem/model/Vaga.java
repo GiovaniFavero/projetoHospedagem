@@ -6,11 +6,17 @@
 package br.com.hospedagem.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -48,6 +54,37 @@ public class Vaga implements Serializable {
     
     @Column(name="reservado")
     private boolean reservado;
+    
+    @ManyToMany
+    @JoinTable(name = "vaga_servicos",
+            joinColumns = {@JoinColumn(name = "id_vaga")},
+            inverseJoinColumns = {@JoinColumn(name = "id_servico")})
+    private List<Servico> servicos = new ArrayList<Servico>();
+
+    public List<Servico> getServicos() {
+        return servicos;
+    }
+
+    public void setServicos(List<Servico> servicos) {
+        this.servicos = servicos;
+    }
+    
+    
+
+    public Vaga(String titulo, String descricao, double valor, int capacidade, String regras, String localizacao, boolean reservado) {
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.valor = valor;
+        this.capacidade = capacidade;
+        this.regras = regras;
+        this.localizacao = localizacao;
+        this.reservado = reservado;
+    }
+
+    public Vaga() {
+    }
+    
+    
 
     public String getTitulo() {
         return titulo;
@@ -139,7 +176,9 @@ public class Vaga implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.hospedagem.model.Vaga[ id=" + id + " ]";
+        return "Vaga{" + "id=" + id + ", titulo=" + titulo + ", descricao=" + descricao + ", valor=" + valor + ", capacidade=" + capacidade + ", regras=" + regras + ", localizacao=" + localizacao + ", reservado=" + reservado + '}';
     }
+
+    
     
 }

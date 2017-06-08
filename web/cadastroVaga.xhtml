@@ -22,38 +22,40 @@
                     
                     <p:panelGrid columns="3">
                         <p:outputLabel value="Titulo"/>
-                        <p:inputText id="tituloVaga" size="110" required="true" requiredMessage="Campo Obrigatório"/>
+                        <p:inputText id="tituloVaga" size="110" value="#{cadastroVagaBean.vaga.titulo}" 
+                                     required="true" requiredMessage="Campo Obrigatório"/>
                         <p:message for="tituloVaga"/>
                         
                         <p:outputLabel value="Descrição"/>
-                        <p:inputText id="descVaga" size="110" required="true" requiredMessage="Campo Obrigatório"/>
+                        <p:inputText id="descVaga" size="110" value="#{cadastroVagaBean.vaga.descricao}" 
+                                     required="true" requiredMessage="Campo Obrigatório"/>
                         <p:message for="descVaga"/>
                         
                         <p:outputLabel value="Valor diário"/>
-                        <p:inputNumber id="valorVaga" size="15" required="true" requiredMessage="Campo Obrigatório"/>
+                        <p:inputNumber id="valorVaga" size="15" value="#{cadastroVagaBean.vaga.valor}"
+                                       required="true" requiredMessage="Campo Obrigatório"/>
                         <p:message for="valorVaga"/>
                         
                         <p:outputLabel value="Capacidade"/>
-                        <p:inputNumber id="capVaga" size="15" required="true" requiredMessage="Campo Obrigatório" placeholder="Nr. de pessoas"/>
+                        <p:inputNumber id="capVaga" size="15" value="#{cadastroVagaBean.vaga.capacidade}" 
+                                       required="true" requiredMessage="Campo Obrigatório" placeholder="Nr. de pessoas"/>
                         <p:message for="capVaga"/>
                         
                         <p:outputLabel value="Serviços inclusos"/>
-                        <p:selectManyCheckbox id="servicosVaga">
-                        <f:selectItem itemValue="1" itemLabel="Wifi"/>
-                        <f:selectItem itemValue="2" itemLabel="TV"/>
-                        <f:selectItem itemValue="3" itemLabel="Café da Manhã"/>
-                        <f:selectItem itemValue="4" itemLabel="Limpeza"/>
-                        <f:selectItem itemValue="5" itemLabel="Estacionamento"/>
-                        <f:selectItem itemValue="6" itemLabel="Serviço de quarto"/>
-                        <f:selectItem itemValue="7" itemLabel="Lavanderia"/>
+                        <p:selectManyCheckbox id="servicosVaga" value="#{cadastroVagaBean.vaga.servicos}">
+                            <f:converter converterId="converterServico"/>
+                            <f:selectItems value="#{cadastroVagaBean.servicos}" var="servico"
+                                           itemValue="#{servico}" itemLabel="#{servico.descricao}"/>
+                            
                         </p:selectManyCheckbox >
                         <p:message for="servicosVaga"/>
                         
                         <p:outputLabel value="Regras"/>
-                        <p:inputText id="regrasVaga" size="110" required="true" requiredMessage="Campo Obrigatório"/>
+                        <p:inputText id="regrasVaga" size="110" value="#{cadastroVagaBean.vaga.regras}"
+                                     required="true" requiredMessage="Campo Obrigatório"/>
                         <p:message for="regrasVaga"/>
                                                 
-                        <p:button value="Salvar"/>
+                        <p:commandButton value="Salvar" action="#{cadastroVagaBean.salvar()}"/>
                     </p:panelGrid>
 
                 </h:form>

@@ -6,6 +6,7 @@
 package br.com.hospedagem.dao.core;
 
 import br.com.hospedagem.dao.jpa.JPAPessoaDAO;
+import br.com.hospedagem.dao.jpa.JPAServicoDAO;
 import br.com.hospedagem.dao.jpa.JPAVagaDAO;
 
 /**
@@ -20,6 +21,10 @@ public class DAOFactory {
     
     public static VagaDAO getVagaDAO(){
         return new JPAVagaDAO();
+    }
+    
+    public static ServicoDAO getServicoDAO(){
+        return new JPAServicoDAO();
     }
     
 }

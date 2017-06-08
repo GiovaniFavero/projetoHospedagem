@@ -14,6 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -33,17 +35,29 @@ public class Pessoa implements Serializable {
     private String nome;
     
     @Column(name="data_nascimento")
+    @Temporal(TemporalType.DATE)
     private Date dataNasc;
     
     @Column(name="telefone")
     private String telefone;
     
-    @Column(name="email")
+    @Column(name="email",unique = true)
     private String email;
     
     @Column(name="profissao")
     private String profissao;
+    
+    @Column(name="senha")
+    private String senha;
 
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+    
     public String getNome() {
         return nome;
     }

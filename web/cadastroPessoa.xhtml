@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
         <h:outputStylesheet library="css" name="estilos.css" />
@@ -11,40 +12,44 @@
     <h:body>
         
         <ui:composition template="template.xhtml">
-
             <ui:define name="titulo">Cadastro Usuário</ui:define>
-
-
-
             <ui:define name="conteudo" >
                 <h:form>
-                    
                     <p:panelGrid columns="3">
                         <p:outputLabel value="Nome"/>
-                        <p:inputText id="nomePessoa" value="#{PessoaBean.pessoa.nome}" required="true" requiredMessage="Campo Obrigatório"/>
+                        <p:inputText id="nomePessoa" value="#{cadastroPessoaBean.pessoa.nome}"
+                                     required="true" requiredMessage="Campo Obrigatório"/>
                         <p:message for="nomePessoa"/>
                         
                         <p:outputLabel value="Data de Nascimento"/>
-                        <p:inputText id="dataNasc" required="true" requiredMessage="Campo Obrigatório" placeholder="DD/MM/AAAA"/>
+                        <p:inputText id="dataNasc" value="#{cadastroPessoaBean.pessoa.dataNasc}"
+                                     required="true" requiredMessage="Campo Obrigatório" placeholder="dd/MM/yyyy"
+                                     converterMessage="Data inválida">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </p:inputText>
                         <p:message for="dataNasc"/>
                         
                         <p:outputLabel value="Telefone"/>
-                        <p:inputText id="telefonePessoa" required="true" requiredMessage="Campo Obrigatório" placeholder="(XX) 9XXXX-XXXX"/>
+                        <p:inputText id="telefonePessoa" value="#{cadastroPessoaBean.pessoa.telefone}" 
+                                     required="true" requiredMessage="Campo Obrigatório" placeholder="(XX) 9XXXX-XXXX"/>
                         <p:message for="telefonePessoa"/>
                         
                         <p:outputLabel value="Profissão"/>
-                        <p:inputText id="profissaoPessoa" required="true" requiredMessage="Campo Obrigatório"/>
+                        <p:inputText id="profissaoPessoa" value="#{cadastroPessoaBean.pessoa.profissao}"
+                                     required="true" requiredMessage="Campo Obrigatório"/>
                         <p:message for="profissaoPessoa"/>
                         
                         <p:outputLabel value="E-mail"/>
-                        <p:inputText id="emailPessoa" required="true" requiredMessage="Campo Obrigatório"/>
+                        <p:inputText id="emailPessoa" value="#{cadastroPessoaBean.pessoa.email}"
+                                     required="true" requiredMessage="Campo Obrigatório"/>
                         <p:message for="emailPessoa"/>
                         
                         <p:outputLabel value="Senha"/>
-                        <p:inputText id="senhaPessoa" required="true" requiredMessage="Campo Obrigatório"/>
+                        <p:password id="senhaPessoa" value="#{cadastroPessoaBean.pessoa.senha}" 
+                                     required="true" requiredMessage="Campo Obrigatório"/>
                         <p:message for="senhaPessoa"/>
                         
-                        <p:button value="Salvar"/>
+                        <p:commandButton value="Salvar" action="#{cadastroPessoaBean.salvar}"/>
                     </p:panelGrid>
 
                 </h:form>

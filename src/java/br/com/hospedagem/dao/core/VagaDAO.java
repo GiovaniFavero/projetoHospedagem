@@ -17,6 +17,6 @@ public interface VagaDAO {
     public void salvar(Vaga p);
     public void remover(Vaga p);
     public List<Vaga> buscarTodos();
-    public Vaga buscar(int id);
+    public Vaga buscar(Long id);
     
 }

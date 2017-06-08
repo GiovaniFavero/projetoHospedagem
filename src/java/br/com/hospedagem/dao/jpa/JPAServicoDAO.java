@@ -5,8 +5,10 @@
  */
 package br.com.hospedagem.dao.jpa;
 
-import br.com.hospedagem.dao.core.VagaDAO;
-import br.com.hospedagem.model.Vaga;
+import br.com.hospedagem.dao.core.PessoaDAO;
+import br.com.hospedagem.dao.core.ServicoDAO;
+import br.com.hospedagem.model.Pessoa;
+import br.com.hospedagem.model.Servico;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -18,7 +20,7 @@ import javax.persistence.Query;
  *
  * @author Favero
  */
-public class JPAVagaDAO implements VagaDAO{
+public class JPAServicoDAO implements ServicoDAO{
     
     public EntityManager getEntityManager(){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HospedagemPU");
@@ -26,33 +28,12 @@ public class JPAVagaDAO implements VagaDAO{
     }
 
     @Override
-    public void salvar(Vaga v) {
-        EntityManager em = null;
-        try{
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("HospedagemPU");
-             em = emf.createEntityManager();
-             em.getTransaction().begin();
-             em.persist(v);
-             em.getTransaction().commit();
-        }catch(PersistenceException pE){
-                
-        }catch(Exception e){
-            e.printStackTrace();
-
-        }finally{
-            if(em != null){
-                em.close();
-            } 
-        }
-    }
-
-    @Override
-    public void remover(Vaga v) {
+    public void salvar(Servico p) {
         EntityManager em = null;
         try{
              em = this.getEntityManager();
              em.getTransaction().begin();
-             em.remove(v);
+             em.persist(p);
              em.getTransaction().commit();
         }catch(PersistenceException pE){
                 
@@ -66,12 +47,31 @@ public class JPAVagaDAO implements VagaDAO{
     }
 
     @Override
-    public List<Vaga> buscarTodos() {
+    public void remover(Servico p) {
         EntityManager em = null;
         try{
-            em = getEntityManager();
-             Query q = em.createQuery("select v from Vaga v");
-             return q.getResultList();
+             em = this.getEntityManager();
+             em.getTransaction().begin();
+             em.remove(p);
+             em.getTransaction().commit();
+        }catch(PersistenceException pE){
+              
+        }catch(Exception e){
+            e.printStackTrace();  
+        }finally{
+            if(em != null){
+                em.close();
+            } 
+        }
+    }
+
+    @Override
+    public List<Servico> buscarTodos() {
+        EntityManager em = null;
+        try{
+             em = getEntityManager();
+             Query q = em.createQuery("SELECT s FROM Servico s");
+             return (List<Servico>) q.getResultList();
         }catch(PersistenceException pE){
                 
         }catch(Exception e){
@@ -85,13 +85,32 @@ public class JPAVagaDAO implements VagaDAO{
     }
 
     @Override
-    public Vaga buscar(Long id) {
+    public Servico buscar(Long id) {
         EntityManager em = null;
         try{
              em = this.getEntityManager();
-             return em.find(Vaga.class, id);
+             return em.find(Servico.class, id);
         }catch(PersistenceException pE){
-                
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            if(em != null){
+                em.close();
+            } 
+        }
+        return null;
+    }
+    
+    public Servico buscarPorDescricao(String desc){
+        EntityManager em = null;
+        try{
+             em = this.getEntityManager();
+             Query q = em.createQuery("Select s from Servico s where s.descricao = :desc");
+             q.setParameter("desc", desc);
+             return (Servico) q.getSingleResult();
+        }catch(PersistenceException pE){
+            
         }catch(Exception e){
             e.printStackTrace();
         }finally{

@@ -34,7 +34,9 @@ public class JPAPessoaDAO implements PessoaDAO{
              em.persist(p);
              em.getTransaction().commit();
         }catch(PersistenceException pE){
-            
+               
+        }catch(Exception e){
+            e.printStackTrace(); 
         }finally{
             if(em != null){
                 em.close();
@@ -51,7 +53,9 @@ public class JPAPessoaDAO implements PessoaDAO{
              em.remove(p);
              em.getTransaction().commit();
         }catch(PersistenceException pE){
-            
+                
+        }catch(Exception e){
+            e.printStackTrace();
         }finally{
             if(em != null){
                 em.close();
@@ -63,10 +67,13 @@ public class JPAPessoaDAO implements PessoaDAO{
     public List<Pessoa> buscarTodos() {
         EntityManager em = null;
         try{
+            em = getEntityManager();
              Query q = em.createQuery("select p from Pessoa p");
              return q.getResultList();
         }catch(PersistenceException pE){
-            
+                
+        }catch(Exception e){
+            e.printStackTrace();
         }finally{
             if(em != null){
                 em.close();
@@ -76,13 +83,15 @@ public class JPAPessoaDAO implements PessoaDAO{
     }
 
     @Override
-    public Pessoa buscar(int id) {
+    public Pessoa buscar(Long id) {
         EntityManager em = null;
         try{
              em = this.getEntityManager();
              return em.find(Pessoa.class, id);
         }catch(PersistenceException pE){
-            
+                
+        }catch(Exception e){
+            e.printStackTrace();
         }finally{
             if(em != null){
                 em.close();

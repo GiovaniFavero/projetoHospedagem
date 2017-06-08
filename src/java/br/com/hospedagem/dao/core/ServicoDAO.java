@@ -5,18 +5,18 @@
  */
 package br.com.hospedagem.dao.core;
 
-import br.com.hospedagem.model.Pessoa;
+import br.com.hospedagem.model.Servico;
 import java.util.List;
 
 /**
  *
  * @author Favero
  */
-public interface PessoaDAO {
+public interface ServicoDAO {
     
-    public void salvar(Pessoa p);
-    public void remover(Pessoa p);
-    public List<Pessoa> buscarTodos();
-    public Pessoa buscar(Long id);
+    public void salvar(Servico s);
+    public void remover(Servico s);
+    public List<Servico> buscarTodos();
+    public Servico buscar(Long id);
     
 }
