@@ -3,20 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.hospedagem.dao.core;
+package br.com.hospedagem.util;
 
 import br.com.hospedagem.model.Pessoa;
-import java.util.List;
 
 /**
  *
  * @author Favero
  */
-public interface PessoaDAO {
+public class UsuarioAtual {
     
-    public void salvar(Pessoa p);
-    public void remover(Pessoa p);
-    public List<Pessoa> buscarTodos() throws Exception;
-    public Pessoa buscar(Long id);
+    public static Pessoa pessoa;
+    
     
 }

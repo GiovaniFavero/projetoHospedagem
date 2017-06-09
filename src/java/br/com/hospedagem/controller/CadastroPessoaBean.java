@@ -38,7 +38,7 @@ public class CadastroPessoaBean {
                 return null;
         }
         this.pessoa = new Pessoa();
-        return "cadastroPessoa.xhtml";
+        return "telaLogin.xhtml";
     }
 
     public Pessoa getPessoa() {

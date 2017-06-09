@@ -33,8 +33,6 @@ public class JPAPessoaDAO implements PessoaDAO{
              em.getTransaction().begin();
              em.persist(p);
              em.getTransaction().commit();
-        }catch(PersistenceException pE){
-               
         }catch(Exception e){
             e.printStackTrace(); 
         }finally{
@@ -52,8 +50,6 @@ public class JPAPessoaDAO implements PessoaDAO{
              em.getTransaction().begin();
              em.remove(p);
              em.getTransaction().commit();
-        }catch(PersistenceException pE){
-                
         }catch(Exception e){
             e.printStackTrace();
         }finally{
@@ -64,22 +60,20 @@ public class JPAPessoaDAO implements PessoaDAO{
     }
 
     @Override
-    public List<Pessoa> buscarTodos() {
+    public List<Pessoa> buscarTodos() throws Exception{
         EntityManager em = null;
         try{
             em = getEntityManager();
              Query q = em.createQuery("select p from Pessoa p");
              return q.getResultList();
-        }catch(PersistenceException pE){
-                
         }catch(Exception e){
             e.printStackTrace();
+            throw new Exception("Falha");
         }finally{
             if(em != null){
                 em.close();
             } 
         }
-        return null;
     }
 
     @Override
@@ -88,8 +82,6 @@ public class JPAPessoaDAO implements PessoaDAO{
         try{
              em = this.getEntityManager();
              return em.find(Pessoa.class, id);
-        }catch(PersistenceException pE){
-                
         }catch(Exception e){
             e.printStackTrace();
         }finally{
@@ -100,4 +92,21 @@ public class JPAPessoaDAO implements PessoaDAO{
         return null;
     }
     
+    public Pessoa buscarLogin(String email, String senha){
+        EntityManager em = null;
+        try{
+             em = this.getEntityManager();
+             Query q = em.createQuery("Select p from Pessoa p where p.email = :email and p.senha = :senha");
+             q.setParameter("email", email);
+             q.setParameter("senha", senha);
+             return (Pessoa) q.getSingleResult();
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            if(em != null){
+                em.close();
+            } 
+        }
+        return null;
+    }
 }

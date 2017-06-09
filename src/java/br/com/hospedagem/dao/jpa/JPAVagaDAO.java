@@ -5,8 +5,11 @@
  */
 package br.com.hospedagem.dao.jpa;
 
+import br.com.hospedagem.controller.login.SessionUtil;
 import br.com.hospedagem.dao.core.VagaDAO;
+import br.com.hospedagem.model.Pessoa;
 import br.com.hospedagem.model.Vaga;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -29,8 +32,8 @@ public class JPAVagaDAO implements VagaDAO{
     public void salvar(Vaga v) {
         EntityManager em = null;
         try{
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("HospedagemPU");
-             em = emf.createEntityManager();
+             v.setDono((Pessoa)SessionUtil.getParam("usuario"));
+             em = this.getEntityManager();
              em.getTransaction().begin();
              em.persist(v);
              em.getTransaction().commit();
@@ -70,8 +73,8 @@ public class JPAVagaDAO implements VagaDAO{
         EntityManager em = null;
         try{
             em = getEntityManager();
-             Query q = em.createQuery("select v from Vaga v");
-             return q.getResultList();
+            Query q = em.createQuery("select v from Vaga v");
+            return q.getResultList();
         }catch(PersistenceException pE){
                 
         }catch(Exception e){
@@ -90,6 +93,26 @@ public class JPAVagaDAO implements VagaDAO{
         try{
              em = this.getEntityManager();
              return em.find(Vaga.class, id);
+        }catch(PersistenceException pE){
+                
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            if(em != null){
+                em.close();
+            } 
+        }
+        return null;
+    }
+    
+    public List<Vaga> buscaPersonalizada(String cidade, Date periodoDe, Date periodoAte, int avaliacao){
+        EntityManager em = null;
+        try{
+             em = getEntityManager();
+             Query q = em.createQuery("select v from Vaga v "
+                     + "where v.cidade = :cidade or v.cidade = v.cidade ");
+             q.setParameter("cidade", cidade);
+             return q.getResultList();
         }catch(PersistenceException pE){
                 
         }catch(Exception e){

@@ -45,14 +45,17 @@ and open the template in the editor.
     
 }
 
-#rodape {
-    
-    border: 1px solid black;
+#rodape{
+    border-top: 1px solid darkgray;
     height: 50px;
     width: 100%;
-    background-color: gainsboro;
-    border-collapse: 10px;
+    font-size: 15px;
+    font-family: arial;
+    color: #ADADAD;
+    margin-top: 8px;
+    text-align: center;
 }
 
-
-
+#valor-vaga{
+    font-size: 50px;
+}

@@ -33,7 +33,6 @@ public class CadastroVagaBean {
     
     public String salvar(){
         try{
-            System.out.println(vaga.toString());
             cadastroVagaRN.salvar(this.vaga);
         }catch(Exception e){
             FacesContext context = FacesContext.getCurrentInstance();

@@ -19,16 +19,18 @@
                     <h:form>
                         <p:panelGrid columns="3">
                             <p:outputLabel value="E-mail"/>
-                            <p:inputText id="emailPessoa" required="true" requiredMessage="Campo Obrigatório"/>
+                            <p:inputText id="emailPessoa" value="#{telaLoginBean.email}"
+                                         required="true" requiredMessage="Campo Obrigatório"/>
                             <p:message for="emailPessoa"/>
                             <p:outputLabel value="Senha"/>
-                            <p:password id="senhaPessoa" value="Senha" required="true" requiredMessage="Senha Obrigatória"/>
+                            <p:password id="senhaPessoa" value="#{telaLoginBean.senha}" 
+                                        required="true" requiredMessage="Senha Obrigatória"/>
                             <p:message for="senhaPessoa"/>
-                            <p:commandButton value="Entrar"/>
+                            <p:commandButton value="Entrar" action="#{telaLoginBean.login()}" update="messages"/>
                         </p:panelGrid>
                         <p:outputLabel value="Ainda não é cadastrado?"/>
                         <h:outputLink value="cadastroPessoa.xhtml">Clique Aqui</h:outputLink> 
-                        
+                        <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
                     </h:form>
                 </div>
             </ui:define>

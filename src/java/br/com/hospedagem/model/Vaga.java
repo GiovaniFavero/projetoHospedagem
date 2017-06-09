@@ -17,6 +17,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -55,11 +58,25 @@ public class Vaga implements Serializable {
     @Column(name="reservado")
     private boolean reservado;
     
+    @Column(name="cidade")
+    private String cidade;
+    
     @ManyToMany
     @JoinTable(name = "vaga_servicos",
             joinColumns = {@JoinColumn(name = "id_vaga")},
             inverseJoinColumns = {@JoinColumn(name = "id_servico")})
     private List<Servico> servicos = new ArrayList<Servico>();
+    
+    @OneToMany(mappedBy = "vaga")
+    private List<Avaliacao> avaliacoes;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_dono", nullable = false)
+    private Pessoa dono;
+    
+    @OneToOne
+    @JoinColumn(name = "id_hospede", nullable = true)
+    private Pessoa hospede;
 
     public List<Servico> getServicos() {
         return servicos;
@@ -83,6 +100,14 @@ public class Vaga implements Serializable {
 
     public Vaga() {
     }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
     
     
 
@@ -93,6 +118,32 @@ public class Vaga implements Serializable {
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
+
+    public List<Avaliacao> getAvaliacoes() {
+        return avaliacoes;
+    }
+
+    public void setAvaliacoes(List<Avaliacao> avaliacoes) {
+        this.avaliacoes = avaliacoes;
+    }
+
+    public Pessoa getDono() {
+        return dono;
+    }
+
+    public void setDono(Pessoa dono) {
+        this.dono = dono;
+    }
+
+    public Pessoa getHospede() {
+        return hospede;
+    }
+
+    public void setHospede(Pessoa hospede) {
+        this.hospede = hospede;
+    }
+    
+    
 
     public String getDescricao() {
         return descricao;

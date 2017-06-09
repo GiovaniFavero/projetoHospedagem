@@ -21,10 +21,11 @@
                                      required="true" requiredMessage="Campo Obrigatório"/>
                         <p:message for="nomePessoa"/>
                         
+                          
                         <p:outputLabel value="Data de Nascimento"/>
                         <p:inputText id="dataNasc" value="#{cadastroPessoaBean.pessoa.dataNasc}"
                                      required="true" requiredMessage="Campo Obrigatório" placeholder="dd/MM/yyyy"
-                                     converterMessage="Data inválida">
+                                     converterMessage="Data inválida (dd/MM/yyyy)">
                             <f:convertDateTime pattern="dd/MM/yyyy"/>
                         </p:inputText>
                         <p:message for="dataNasc"/>
@@ -49,7 +50,7 @@
                                      required="true" requiredMessage="Campo Obrigatório"/>
                         <p:message for="senhaPessoa"/>
                         
-                        <p:commandButton value="Salvar" action="#{cadastroPessoaBean.salvar}"/>
+                        <p:commandButton value="Salvar" action="#{cadastroPessoaBean.salvar}" ajax="false"/>
                     </p:panelGrid>
 
                 </h:form>

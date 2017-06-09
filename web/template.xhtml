@@ -24,23 +24,14 @@ and open the template in the editor.
         <div id="menu">
             <h:form>
                 <p:menubar id="barraMenu" style="text-align:center !important;">
-                    <p:submenu label="Vagas" icon="ui-icon-home">
-                        <p:submenu label="Pesquisar por cidade"></p:submenu>
-                        <p:submenu label="Pesquisar por periodo de estadia"></p:submenu>
-                        <p:submenu label="Pesquisar por avaliação mínima"></p:submenu>
-                        
+                    <p:menuitem value="Início" outcome="index.xhtml" icon="ui-icon-home" ></p:menuitem>
+                    <p:submenu label="Vagas" icon="ui-icon-star">
+                        <p:menuitem value="Busca Avançada" outcome="consultaVagas.xhtml"></p:menuitem>
+                        <p:menuitem value="Cadastrar Vaga" outcome="cadastroVaga.xhtml"></p:menuitem>
                     </p:submenu>
-                    
-                    <p:menuitem value="Cadastrar Vaga" icon="ui-icon-pin-s" outcome="cadastroVaga.xhtml"/>
-                    
-                    <p:menuitem value="Entrar/Cadastrar-se" icon="ui-icon-key" outcome="telaLogin.xhtml" >
-                        
-                    </p:menuitem>
-                    
-                    <p:menuitem>
-                        <p:inputText  style="float: right" size="30" placeholder="Buscar por ofertas"/>
-                    </p:menuitem>
-                                        
+                    <f:facet name="options">
+                        <p:commandLink type="button" value="#{templateBean.botao}" action="#{templateBean.acao()}"/>
+                    </f:facet>
                 </p:menubar>
             </h:form>
         </div>
@@ -50,7 +41,8 @@ and open the template in the editor.
         </div>
         
         <div id="rodape">
-            <h3>Desenvolvido por Esley e Giovane</h3>
+            <p>© Desenvolvimento de Sistemas Web 2017/2. HOSPEDAGENS. Todos os direitos reservados.</p>
+                <p>Desenvolvido por Esley e Giovani.</p>
         </div>
     </h:body>
 </html>

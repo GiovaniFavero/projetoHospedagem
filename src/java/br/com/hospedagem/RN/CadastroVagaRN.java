@@ -11,6 +11,7 @@ import br.com.hospedagem.dao.core.VagaDAO;
 import br.com.hospedagem.dao.jpa.JPAVagaDAO;
 import br.com.hospedagem.model.Servico;
 import br.com.hospedagem.model.Vaga;
+import br.com.hospedagem.util.UsuarioAtual;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +29,7 @@ public class CadastroVagaRN {
     }
     
     public void salvar(Vaga vaga){
+        vaga.setDono(UsuarioAtual.pessoa);
         vagaDAO.salvar(vaga);
     }
     
