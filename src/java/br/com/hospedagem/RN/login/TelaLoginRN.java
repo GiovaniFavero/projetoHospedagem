@@ -42,6 +42,10 @@ public class TelaLoginRN {
     public void persistencia(){
         try{
             List<Pessoa> pessoas = this.pessoaDAO.buscarTodos();
+            if(pessoas.size() == 0){
+                Pessoa p = new Pessoa("",null,"","admin","","admin");
+                 this.pessoaDAO.salvar(p);
+            }
         }catch(Exception e){
             Pessoa p = new Pessoa("",null,"","admin","","admin");
             this.pessoaDAO.salvar(p);

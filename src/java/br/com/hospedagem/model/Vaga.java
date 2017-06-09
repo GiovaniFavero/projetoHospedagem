@@ -77,6 +77,19 @@ public class Vaga implements Serializable {
     @OneToOne
     @JoinColumn(name = "id_hospede", nullable = true)
     private Pessoa hospede;
+    
+    @Column(name="ativo")
+    private boolean ativo;
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+    
+    
 
     public List<Servico> getServicos() {
         return servicos;

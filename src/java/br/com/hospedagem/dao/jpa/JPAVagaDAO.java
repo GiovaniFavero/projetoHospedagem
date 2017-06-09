@@ -125,4 +125,24 @@ public class JPAVagaDAO implements VagaDAO{
         return null;
     }
     
+    public List<Vaga> buscarPorPessoa(Pessoa p){
+        EntityManager em = null;
+        try{
+             em = getEntityManager();
+             Query q = em.createQuery("select v from Vaga v "
+                     + "where v.dono = :dono ");
+             q.setParameter("dono", p);
+             return q.getResultList();
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            if(em != null){
+                em.close();
+            } 
+        }
+        return null;
+    }
+
+
+    
 }

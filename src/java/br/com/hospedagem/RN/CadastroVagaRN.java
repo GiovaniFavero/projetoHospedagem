@@ -5,10 +5,12 @@
  */
 package br.com.hospedagem.RN;
 
+import br.com.hospedagem.controller.login.SessionUtil;
 import br.com.hospedagem.dao.core.DAOFactory;
 import br.com.hospedagem.dao.core.ServicoDAO;
 import br.com.hospedagem.dao.core.VagaDAO;
 import br.com.hospedagem.dao.jpa.JPAVagaDAO;
+import br.com.hospedagem.model.Pessoa;
 import br.com.hospedagem.model.Servico;
 import br.com.hospedagem.model.Vaga;
 import br.com.hospedagem.util.UsuarioAtual;
@@ -21,15 +23,14 @@ import java.util.List;
  */
 public class CadastroVagaRN {
     
-    private VagaDAO vagaDAO;
+    private JPAVagaDAO vagaDAO = new JPAVagaDAO();
     private ServicoDAO servicoDAO;
 
     public CadastroVagaRN() {
-        vagaDAO = DAOFactory.getVagaDAO();
     }
     
     public void salvar(Vaga vaga){
-        vaga.setDono(UsuarioAtual.pessoa);
+        vaga.setDono((Pessoa) SessionUtil.getParam("usuario"));
         vagaDAO.salvar(vaga);
     }
     
@@ -52,4 +53,7 @@ public class CadastroVagaRN {
         return servicos;
     }
     
+    public List<Vaga> buscarPorPessoa(){
+        return this.vagaDAO.buscarPorPessoa((Pessoa) SessionUtil.getParam("usuario"));
+    }
 }

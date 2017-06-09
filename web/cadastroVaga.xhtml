@@ -10,16 +10,10 @@
         <h:outputStylesheet library="css" name="estilos.css" />
     </h:head>
     <h:body>
-        
         <ui:composition template="template.xhtml">
-
             <ui:define name="titulo">Cadastro Vaga</ui:define>
-
-
-
             <ui:define name="conteudo" >
                 <h:form>
-                    
                     <p:panelGrid columns="3">
                         <p:outputLabel value="Titulo"/>
                         <p:inputText id="tituloVaga" size="110" value="#{cadastroVagaBean.vaga.titulo}" 
@@ -57,7 +51,34 @@
                                                 
                         <p:commandButton value="Salvar" action="#{cadastroVagaBean.salvar()}" ajax="false"/>
                     </p:panelGrid>
+                </h:form>
+                <h:form>
+                    <p:dataTable var="vaga" value="#{cadastroVagaBean.vagasModel}">
+                        <p:column headerText="Título" class="text-alinhado">
+                            <h:outputText value="#{vaga.titulo}" />
+                        </p:column>
 
+                        <p:column headerText="Valor" class="text-alinhado">
+                            <h:outputText value="#{vaga.valor}" />
+                        </p:column>
+
+                        <p:column headerText="Capacidade" class="text-alinhado">
+                            <h:outputText value="#{vaga.capacidade}" />
+                        </p:column>
+
+                        <p:column headerText="Reservado" class="text-alinhado">
+                            <p:selectBooleanCheckbox value="#{vaga.reservado}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Ativo" class="text-alinhado">
+                            <p:selectBooleanCheckbox value="#{vaga.ativo}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Ações" class="text-alinhado">
+                            <p:commandButton value="Alterar" action="#{cadastroVagaBean.alterar()}"/>
+                            <p:commandButton value="Excluir" action="#{cadastroVagaBean.excluir()}"/>
+                        </p:column>
+                    </p:dataTable>
                 </h:form>
             </ui:define>
 
