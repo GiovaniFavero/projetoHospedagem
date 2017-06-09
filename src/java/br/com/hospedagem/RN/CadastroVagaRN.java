@@ -29,9 +29,9 @@ public class CadastroVagaRN {
     public CadastroVagaRN() {
     }
     
-    public void salvar(Vaga vaga){
+    public Vaga salvar(Vaga vaga){
         vaga.setDono((Pessoa) SessionUtil.getParam("usuario"));
-        vagaDAO.salvar(vaga);
+        return vagaDAO.salvar(vaga);
     }
     
     public List<Servico> carregaServicos(){
@@ -55,5 +55,9 @@ public class CadastroVagaRN {
     
     public List<Vaga> buscarPorPessoa(){
         return this.vagaDAO.buscarPorPessoa((Pessoa) SessionUtil.getParam("usuario"));
+    }
+    
+    public void remover(Vaga v){
+        this.vagaDAO.remover(v);
     }
 }

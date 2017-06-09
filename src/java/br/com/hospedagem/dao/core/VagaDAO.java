@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface VagaDAO {
     
-    public void salvar(Vaga p);
+    public Vaga salvar(Vaga p);
     public void remover(Vaga p);
     public List<Vaga> buscarTodos();
     public Vaga buscar(Long id);

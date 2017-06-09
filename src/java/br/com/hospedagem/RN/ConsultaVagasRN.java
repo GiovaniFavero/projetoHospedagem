@@ -28,4 +28,8 @@ public class ConsultaVagasRN {
         return vagaDAO.buscarTodos();
     }
     
+    public List<Vaga> buscarVagasDisponiveis(){
+        return vagaDAO.buscarVagasDisponíveis();
+    }
+    
 }

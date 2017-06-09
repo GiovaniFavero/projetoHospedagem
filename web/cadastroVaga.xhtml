@@ -48,7 +48,13 @@
                         <p:inputText id="regrasVaga" size="110" value="#{cadastroVagaBean.vaga.regras}"
                                      required="true" requiredMessage="Campo Obrigatório"/>
                         <p:message for="regrasVaga"/>
-                                                
+                        
+                        <p:outputLabel value="Reservado"/>
+                        <p:selectBooleanCheckbox value="#{cadastroVagaBean.vaga.reservado}"/>  
+                        <p:outputLabel value=""/>
+                        <p:outputLabel value="Ativo"/>
+                        <p:selectBooleanCheckbox value="#{cadastroVagaBean.vaga.ativo}"/>  
+                        <p:outputLabel value=""/>
                         <p:commandButton value="Salvar" action="#{cadastroVagaBean.salvar()}" ajax="false"/>
                     </p:panelGrid>
                 </h:form>
@@ -67,16 +73,16 @@
                         </p:column>
 
                         <p:column headerText="Reservado" class="text-alinhado">
-                            <p:selectBooleanCheckbox value="#{vaga.reservado}"/>
+                            <p:selectBooleanCheckbox value="#{vaga.reservado}" disabled="true"/>
                         </p:column>
                         
-                        <p:column headerText="Ativo" class="text-alinhado">
-                            <p:selectBooleanCheckbox value="#{vaga.ativo}"/>
+                        <p:column headerText="Ativo" class="text-alinhado" >
+                            <p:selectBooleanCheckbox value="#{vaga.ativo}" disabled="true"/>
                         </p:column>
                         
                         <p:column headerText="Ações" class="text-alinhado">
-                            <p:commandButton value="Alterar" action="#{cadastroVagaBean.alterar()}"/>
-                            <p:commandButton value="Excluir" action="#{cadastroVagaBean.excluir()}"/>
+                            <p:commandButton value="Alterar" action="#{cadastroVagaBean.alterar()}" ajax="false" />
+                            <p:commandButton value="Excluir" action="#{cadastroVagaBean.excluir()}" ajax="false"/>
                         </p:column>
                     </p:dataTable>
                 </h:form>

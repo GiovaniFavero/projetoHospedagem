@@ -11,7 +11,7 @@ import br.com.hospedagem.model.Vaga;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
@@ -21,7 +21,7 @@ import javax.faces.model.ListDataModel;
  * @author Favero
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class CadastroVagaBean {
     
     private Vaga vaga = new Vaga();
@@ -39,9 +39,9 @@ public class CadastroVagaBean {
     
     public String salvar(){
         try{
-            cadastroVagaRN.salvar(this.vaga);
-            if(!vagas.contains(this.vaga)){
-                this.vagas.add(this.vaga);
+            Vaga temp = cadastroVagaRN.salvar(this.vaga);
+            if(!vagas.contains(temp)){
+                this.vagas.add(temp);
             }
         }catch(Exception e){
             FacesContext context = FacesContext.getCurrentInstance();
@@ -60,6 +60,7 @@ public class CadastroVagaBean {
     
     public String excluir(){
         this.vaga = vagasModel.getRowData();
+        this.cadastroVagaRN.remover(this.vaga);
         vagas.remove(this.vaga);
         this.vaga = new Vaga();
         return "cadastroVaga.xhtml";

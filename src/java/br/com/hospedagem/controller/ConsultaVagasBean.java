@@ -31,7 +31,7 @@ public class ConsultaVagasBean {
     
     public ConsultaVagasBean() {
         this.consultaVagasRn = new ConsultaVagasRN();
-        this.vagasResult = consultaVagasRn.buscarTodos();
+        this.vagasResult = consultaVagasRn.buscarVagasDisponiveis();
     }
     
     public void buscar(){
@@ -41,6 +41,7 @@ public class ConsultaVagasBean {
             
         }
     }
+    
 
     public String getCidade() {
         return cidade;

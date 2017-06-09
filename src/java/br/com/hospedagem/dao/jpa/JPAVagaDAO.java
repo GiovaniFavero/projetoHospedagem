@@ -29,19 +29,19 @@ public class JPAVagaDAO implements VagaDAO{
     }
 
     @Override
-    public void salvar(Vaga v) {
+    public Vaga salvar(Vaga v) {
         EntityManager em = null;
         try{
+             Vaga temp;
              v.setDono((Pessoa)SessionUtil.getParam("usuario"));
              em = this.getEntityManager();
              em.getTransaction().begin();
-             em.persist(v);
+             temp = em.merge(v);
              em.getTransaction().commit();
-        }catch(PersistenceException pE){
-                
+             return temp;
         }catch(Exception e){
             e.printStackTrace();
-
+            return null;
         }finally{
             if(em != null){
                 em.close();
@@ -55,7 +55,8 @@ public class JPAVagaDAO implements VagaDAO{
         try{
              em = this.getEntityManager();
              em.getTransaction().begin();
-             em.remove(v);
+             Vaga vaga = em.merge(v);
+             em.remove(vaga);
              em.getTransaction().commit();
         }catch(PersistenceException pE){
                 
@@ -143,6 +144,23 @@ public class JPAVagaDAO implements VagaDAO{
         return null;
     }
 
-
+    public List<Vaga> buscarVagasDisponíveis(){
+        EntityManager em = null;
+        try{
+             em = getEntityManager();
+             Query q = em.createQuery("select v from Vaga v "
+                     + "where v.ativo = :ativo and v.reservado = :reservado ");
+             q.setParameter("ativo", true);
+             q.setParameter("reservado", false);
+             return q.getResultList();
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            if(em != null){
+                em.close();
+            } 
+        }
+        return null;
+    }
     
 }
