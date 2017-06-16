@@ -15,40 +15,34 @@
             <ui:define name="titulo">Cadastro Usuário</ui:define>
             <ui:define name="conteudo" >
                 <h:form>
-                    <p:panelGrid columns="3">
+                    <p:growl id="growl" showDetail="true" sticky="false" life="4000" />
+                    <p:panelGrid columns="2">
                         <p:outputLabel value="Nome"/>
                         <p:inputText id="nomePessoa" value="#{cadastroPessoaBean.pessoa.nome}"
-                                     required="true" requiredMessage="Campo Obrigatório"/>
-                        <p:message for="nomePessoa"/>
-                        
+                                     required="true" requiredMessage="Campo Nome Obrigatório"/>
                           
                         <p:outputLabel value="Data de Nascimento"/>
                         <p:inputText id="dataNasc" value="#{cadastroPessoaBean.pessoa.dataNasc}"
-                                     required="true" requiredMessage="Campo Obrigatório" placeholder="dd/MM/yyyy"
+                                     required="true" requiredMessage="Campo Data Nascimento Obrigatório" placeholder="dd/MM/yyyy"
                                      converterMessage="Data inválida (dd/MM/yyyy)">
                             <f:convertDateTime pattern="dd/MM/yyyy"/>
                         </p:inputText>
-                        <p:message for="dataNasc"/>
                         
                         <p:outputLabel value="Telefone"/>
                         <p:inputText id="telefonePessoa" value="#{cadastroPessoaBean.pessoa.telefone}" 
-                                     required="true" requiredMessage="Campo Obrigatório" placeholder="(XX) 9XXXX-XXXX"/>
-                        <p:message for="telefonePessoa"/>
+                                     required="true" requiredMessage="Campo Telefone Obrigatório" placeholder="(XX) 9XXXX-XXXX"/>
                         
                         <p:outputLabel value="Profissão"/>
                         <p:inputText id="profissaoPessoa" value="#{cadastroPessoaBean.pessoa.profissao}"
-                                     required="true" requiredMessage="Campo Obrigatório"/>
-                        <p:message for="profissaoPessoa"/>
+                                     required="true" requiredMessage="Campo Profissão Obrigatório"/>
                         
                         <p:outputLabel value="E-mail"/>
                         <p:inputText id="emailPessoa" value="#{cadastroPessoaBean.pessoa.email}"
-                                     required="true" requiredMessage="Campo Obrigatório"/>
-                        <p:message for="emailPessoa"/>
+                                     required="true" requiredMessage="Campo E-mail Obrigatório"/>
                         
                         <p:outputLabel value="Senha"/>
                         <p:password id="senhaPessoa" value="#{cadastroPessoaBean.pessoa.senha}" 
-                                     required="true" requiredMessage="Campo Obrigatório"/>
-                        <p:message for="senhaPessoa"/>
+                                     required="true" requiredMessage="Campo Senha Obrigatório"/>
                         
                         <p:commandButton value="Salvar" action="#{cadastroPessoaBean.salvar}" ajax="false"/>
                     </p:panelGrid>

@@ -33,7 +33,6 @@ public class JPAVagaDAO implements VagaDAO{
         EntityManager em = null;
         try{
              Vaga temp;
-             v.setDono((Pessoa)SessionUtil.getParam("usuario"));
              em = this.getEntityManager();
              em.getTransaction().begin();
              temp = em.merge(v);
@@ -106,16 +105,14 @@ public class JPAVagaDAO implements VagaDAO{
         return null;
     }
     
-    public List<Vaga> buscaPersonalizada(String cidade, Date periodoDe, Date periodoAte, int avaliacao){
+    public List<Vaga> buscarPorPessoa(Pessoa p){
         EntityManager em = null;
         try{
              em = getEntityManager();
              Query q = em.createQuery("select v from Vaga v "
-                     + "where v.cidade = :cidade or v.cidade = v.cidade ");
-             q.setParameter("cidade", cidade);
+                     + "where v.dono = :dono ");
+             q.setParameter("dono", p);
              return q.getResultList();
-        }catch(PersistenceException pE){
-                
         }catch(Exception e){
             e.printStackTrace();
         }finally{
@@ -126,13 +123,13 @@ public class JPAVagaDAO implements VagaDAO{
         return null;
     }
     
-    public List<Vaga> buscarPorPessoa(Pessoa p){
+    public List<Vaga> buscarPorHospede(Pessoa p){
         EntityManager em = null;
         try{
              em = getEntityManager();
              Query q = em.createQuery("select v from Vaga v "
-                     + "where v.dono = :dono ");
-             q.setParameter("dono", p);
+                     + "where v.hospede = :hospede ");
+             q.setParameter("hospede", p);
              return q.getResultList();
         }catch(Exception e){
             e.printStackTrace();
@@ -163,4 +160,89 @@ public class JPAVagaDAO implements VagaDAO{
         return null;
     }
     
+    public List<Vaga> buscarVagasPorCidade(String cidade){
+        EntityManager em = null;
+        try{
+             em = getEntityManager();
+             Query q = em.createQuery("select v from Vaga v "
+                     + "where v.ativo = :ativo and v.reservado = :reservado "
+                     + "and v.cidade = :cidade ");
+             q.setParameter("ativo", true);
+             q.setParameter("reservado", false);
+             q.setParameter("cidade", cidade);
+             return q.getResultList();
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            if(em != null){
+                em.close();
+            } 
+        }
+        return null;
+    }
+    
+    public List<Vaga> buscarVagasPorPeriodo(Date periodoDe, Date periodoAte){
+        EntityManager em = null;
+        try{
+             em = getEntityManager();
+             Query q = em.createQuery("select v from Vaga v "
+                     + "where v.ativo = :ativo and v.reservado = :reservado "
+                     + "and (v.periodoInicial between :periodoDe and :periodoAte "
+                     + "or v.periodoFinal between :periodoDe1 and :periodoAte1) ");
+             q.setParameter("ativo", true);
+             q.setParameter("reservado", false);
+             q.setParameter("periodoDe", periodoDe);
+             q.setParameter("periodoAte", periodoAte);
+             q.setParameter("periodoDe1", periodoDe);
+             q.setParameter("periodoAte1", periodoAte);
+             return q.getResultList();
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            if(em != null){
+                em.close();
+            } 
+        }
+        return null;
+    }
+    
+    public List<Vaga> buscarVagasPorAvaliacaoMinima(int avaliacaoMinima){
+        EntityManager em = null;
+        try{
+             em = getEntityManager();
+             Query q = em.createQuery("select v from Vaga v "
+                     + "where v.ativo = :ativo and v.reservado = :reservado "
+                     + "and :avaliacaoMinima <= (Select min(a.valor) from "
+                     + "Avaliacao a where a.vaga = v)");
+             q.setParameter("ativo", true);
+             q.setParameter("reservado", false);
+             q.setParameter("avaliacaoMinima", avaliacaoMinima);
+             return q.getResultList();
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            if(em != null){
+                em.close();
+            } 
+        }
+        return null;
+    }
+    
+    public List<Vaga> buscarVagasPorHospede(Pessoa p){
+        EntityManager em = null;
+        try{
+             em = getEntityManager();
+             Query q = em.createQuery("select v from Vaga v "
+                     + "where v.hospede = :hospede");
+             q.setParameter("hospede", p);
+             return q.getResultList();
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            if(em != null){
+                em.close();
+            } 
+        }
+        return null;
+    }
 }

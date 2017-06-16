@@ -6,10 +6,11 @@
 package br.com.hospedagem.controller;
 
 import br.com.hospedagem.RN.CadastroPessoaRN;
+import br.com.hospedagem.controller.login.SessionUtil;
 import br.com.hospedagem.model.Pessoa;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 /**
@@ -17,7 +18,7 @@ import javax.faces.context.FacesContext;
  * @author Favero
  */
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class CadastroPessoaBean {
     
     private Pessoa pessoa = new Pessoa();
@@ -26,6 +27,7 @@ public class CadastroPessoaBean {
     
     public CadastroPessoaBean() {
         this.cadastroPessoaRN = new CadastroPessoaRN();
+        editarPerfil();
     }
     
     public String salvar(){
@@ -39,6 +41,13 @@ public class CadastroPessoaBean {
         }
         this.pessoa = new Pessoa();
         return "telaLogin.xhtml";
+    }
+    
+    public void editarPerfil(){
+        Pessoa temp = (Pessoa) SessionUtil.getParam("usuario");
+        if(temp != null){
+            this.pessoa = temp;
+        }
     }
 
     public Pessoa getPessoa() {

@@ -50,12 +50,12 @@ public class CadastroVagaBean {
             return null;
         }
         this.vaga = new Vaga();
-        return "cadastroVaga.xhtml";
+        return "";
     }
     
     public String alterar(){
         this.vaga = vagasModel.getRowData();
-        return "cadastroVaga.xhtml";
+        return "";
     }
     
     public String excluir(){
@@ -63,7 +63,14 @@ public class CadastroVagaBean {
         this.cadastroVagaRN.remover(this.vaga);
         vagas.remove(this.vaga);
         this.vaga = new Vaga();
-        return "cadastroVaga.xhtml";
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Sucesso",  "Vaga excluída com sucesso!") );
+        return "";
+    }
+    
+    public void saveMessage(){
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Sucesso","Vaga cadastrada/alterada com sucesso!") );
     }
     
     

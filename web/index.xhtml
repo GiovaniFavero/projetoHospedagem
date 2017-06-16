@@ -14,21 +14,122 @@
             <ui:define name="titulo">Tela inicial</ui:define>
             <ui:define name="conteudo">
                 <h:form>
+                    <p:panelGrid>
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="Pesquisa por:"/>
+                            </p:column>
+                            <p:column>
+                                
+                                <p:selectOneMenu value="#{consultaVagasBean.tipoConsulta}">
+                                    <f:selectItem itemValue="0" itemLabel=""/>
+                                    <f:selectItem itemValue="1" itemLabel="Cidade"/>
+                                    <f:selectItem itemValue="2" itemLabel="Período de Estadia"/>
+                                    <f:selectItem itemValue="3" itemLabel="Avaliação Mínima"/>
+                                    <p:ajax listener="#{consultaVagasBean.setTipoConsulta}" event="change" update="cidade periodoDe periodoAte avaliacao"/>
+                                </p:selectOneMenu>
+                                
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="Cidade:" />
+                            </p:column>
+                            <p:column>
+                                <p:inputText id="cidade" value="#{consultaVagasBean.cidade}" 
+                                             binding="#{consultaVagasBean.cidadeUi}" />
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="Período de Hospedagem:" />
+                            </p:column>
+                            <p:column>
+                                <p:calendar id="periodoDe" value="#{consultaVagasBean.periodoDe}" 
+                                            binding="#{consultaVagasBean.periodoDeUi}" pattern="dd/MM/yyyy">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </p:calendar>
+                            </p:column>
+                            <p:column>
+                                Até
+                            </p:column>
+                            <p:column>
+                                <p:calendar id="periodoAte" value="#{consultaVagasBean.periodoAte}" 
+                                            binding="#{consultaVagasBean.periodoAteUi}" pattern="dd/MM/yyyy">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </p:calendar>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="Avaliação mínima: " />
+                            </p:column>
+                            <p:column>
+                                <p:spinner id="avaliacao" min="0" max="10" 
+                                           value="#{consultaVagasBean.avaliacaoMinima}" binding="#{consultaVagasBean.avaliacaoUi}"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <p:commandButton ajax="false" value="Pesquisar" action="#{consultaVagasBean.pesquisar}"/>
+                            </p:column>
+                        </p:row>
+                    </p:panelGrid>
+                </h:form>
+                
+                <h:form>
                     <p:dataGrid var="vaga" value="#{consultaVagasBean.vagasResult}" columns="3" layout="grid"
                                 rows="12" paginator="true" id="vagas"
                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                 rowsPerPageTemplate="6,12,16">
  
                         <f:facet name="header">
-                            Ofertas!
+                            Vagas Disponíveis
                         </f:facet>
  
                         <p:panel header="#{vaga.titulo}" style="text-align:center">
-                            <h:panelGrid columns="1" style="width:100%">
-                                <h:outputText id="valor-vaga"  value="#{vaga.valor}" />
+                            <h:panelGrid style="width:100%" >
+                                <p:row>
+                                    <p:column colspan="2">
+                                        <p:outputLabel value="#{vaga.descricao}"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>
+                                        <p:outputLabel value="Capacidade: " />
+                                        <p:outputLabel value="#{vaga.capacidade}" />
+                                        <p:outputLabel value=" pessoa(s)" />
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column colspan="2">
+                                        <p:outputLabel value="#{vaga.localizacao}" />
+                                        -
+                                        <p:outputLabel value="#{vaga.cidade}" />
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column colspan="2">
+                                        <b><p:outputLabel class="valor-vaga" value="#{vaga.valor}" >
+                                            <f:convertNumber type="currency" currencySymbol="R$"/>
+                                        </p:outputLabel></b>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column colspan="2">
+                                        <p:outputLabel value="Responsável: " />
+                                        <p:link value="#{vaga.dono.nome}" outcome="#{consultaVagasBean.vizualizarPerfil(vaga)}" includeViewParams="true"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column colspan="2">
+                                        <p:commandButton value="Ver Mais / Reservar" action="#{consultaVagasBean.vizualizar(vaga)}"/>
+                                    </p:column>
+                                </p:row>
                             </h:panelGrid>
                         </p:panel>
                     </p:dataGrid>
+                   
                 </h:form>
             </ui:define>
         </ui:composition>

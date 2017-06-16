@@ -7,6 +7,7 @@ package br.com.hospedagem.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,6 +22,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -79,6 +82,51 @@ public class Vaga implements Serializable {
     
     @Column(name="ativo")
     private boolean ativo;
+    
+    @Temporal(TemporalType.DATE)
+    @Column(name="periodo_inicial")
+    private Date periodoInicial;
+    
+    @Temporal(TemporalType.DATE)
+    @Column(name="periodo_final")
+    private Date periodoFinal;
+    
+    @OneToMany(mappedBy = "vaga")
+    private List<HistoricoVaga> historicoVagas;
+    
+    public double getMediaAvaliacoes(){
+        double total = 0;
+        for(Avaliacao s : this.avaliacoes){
+            total = total + s.getValor();
+        }
+        return total / this.avaliacoes.size();
+    }
+    
+    public void addHistorico(HistoricoVaga historico){
+        this.historicoVagas.add(historico);
+    }
+    
+    public int getQtAvaliacoes(){
+        return this.avaliacoes.size();
+    }
+
+    public Date getPeriodoInicial() {
+        return periodoInicial;
+    }
+
+    public void setPeriodoInicial(Date periodoInicial) {
+        this.periodoInicial = periodoInicial;
+    }
+
+    public Date getPeriodoFinal() {
+        return periodoFinal;
+    }
+
+    public void setPeriodoFinal(Date periodoFinal) {
+        this.periodoFinal = periodoFinal;
+    }
+    
+    
 
     public boolean isAtivo() {
         return ativo;
@@ -101,6 +149,7 @@ public class Vaga implements Serializable {
     
 
     public Vaga(String titulo, String descricao, double valor, int capacidade, String regras, String localizacao, boolean reservado) {
+        this.historicoVagas = new ArrayList<>();
         this.titulo = titulo;
         this.descricao = descricao;
         this.valor = valor;
@@ -111,6 +160,7 @@ public class Vaga implements Serializable {
     }
 
     public Vaga() {
+        this.historicoVagas = new ArrayList<>();
     }
 
     public String getCidade() {

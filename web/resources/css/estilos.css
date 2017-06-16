@@ -56,10 +56,114 @@ and open the template in the editor.
     text-align: center;
 }
 
-#valor-vaga{
-    font-size: 50px;
+.valor-vaga{
+    font-size: 100px;
 }
 
 .text-alinhado{
     text-align: center;
+}
+.text-alinhado-centro{
+    text-align: center;
+}
+
+#dialog{
+    width: 450px; 
+    height: 450px; 
+    font-size: 20px
+}
+
+#detalhe{
+    width: 100%;
+    height: 100%;
+    background-color: blue;
+}
+
+#detalhe-esquerda{
+    float: left;
+    width: 20%;
+    color: white;
+}
+
+#detalhe-centro{
+    float: left;
+    width: 59.5%;
+    border: 1px solid black;
+}
+
+#detalhe-centro-top{
+    width: 100%;
+    height: 70px;
+    font-size: 20px;
+    text-align: center;
+    margin-top: 10px;
+    font-family: sans-serif;
+}
+#detalhe-centro-imgs{
+    width: 100%;
+    height: 300px;
+    text-align: center;
+}
+
+#detalhe-centro-bottom{
+    width: 100%;
+    height: 100%;
+}
+
+.table-servicos{
+    width: 150px;
+    text-align: center;
+    float: right;
+    margin-right: 40px;
+    margin-bottom: 40px;
+}
+
+#detalhe-centro-bottom-direita{
+    float: right;
+    width: 20%;
+}
+
+#detalhe-centro-bottom-esquerda{
+    float: left;
+    width: 80%;
+    text-align: center;
+}
+.detalhe-centro-bottom-esquerda-panel{
+    width: 100%;
+    text-align: center;
+}
+
+#detalhe-direita{
+    float: right;
+    width: 20%;
+    color: white;
+}
+
+
+.detalhe-centro-bottom-esquerda-panel-preco{
+    color: green;
+    font-size: 20px;
+    font-family: sans-serif;
+}
+
+.detalhe-centro-bottom-esquerda-panel-texto{
+    font-size: 20px;
+    font-family: sans-serif;
+}
+
+#detalhe-centro-bottom-esquerda-avaliacao{
+    margin-top: 30px;
+    text-align: left;
+    margin-left: 20px;
+    color: blue;
+    width: 50%;
+    float: left;
+}
+
+#detalhe-centro-bottom-esquerda-botao{
+    width: 20%;
+    float: right;
+    margin-top: 50px;
+    text-align: left;
+    margin-left: 20px;
 }

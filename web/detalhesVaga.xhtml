@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>Cadastro Usuário</title>
+        <h:outputStylesheet library="css" name="estilos.css" />
+    </h:head>
+    <h:body>
+        <ui:composition template="template.xhtml">
+            <ui:define name="titulo">Detalhes Vaga</ui:define>
+            <ui:define name="conteudo">
+                <h:form>
+                <div id="detalhe">
+                    <div id="detalhe-esquerda">
+                        <h:outputLabel value="T"/>
+                    </div>
+                    <div id="detalhe-centro">
+                        <div id="detalhe-centro-top">
+                            <p:outputLabel value="#{detalhesVagaBean.vaga.titulo}"/>
+                        </div>
+                        <div id="detalhe-centro-imgs">
+                            Aqui vão as imagens
+                        </div>
+                        <div id="detalhe-centro-bottom">
+                            <div id="detalhe-centro-bottom-esquerda">
+                                <div>
+                                    <h:panelGrid class="detalhe-centro-bottom-esquerda-panel">
+                                        <p:outputLabel class="detalhe-centro-bottom-esquerda-panel-texto" value="#{detalhesVagaBean.vaga.descricao}"/>
+                                        <h:column>
+                                            <div class="detalhe-centro-bottom-esquerda-panel-preco">
+                                                    Preço diária para <p:outputLabel value="#{detalhesVagaBean.vaga.capacidade}"/> pessoa(s): 
+                                                <b><p:outputLabel value="#{detalhesVagaBean.vaga.valor}">
+                                                    <f:convertNumber type="currency" currencySymbol="R$"/>
+                                                    </p:outputLabel></b>
+                                            </div>
+                                        </h:column>
+                                        <h:column>
+                                            <div class="detalhe-centro-bottom-esquerda-panel-texto">
+                                                <p:outputLabel value="Localizado em "/>
+                                                <p:outputLabel value="#{detalhesVagaBean.vaga.localizacao}"/>
+                                                -
+                                                <p:outputLabel value="#{detalhesVagaBean.vaga.cidade}"/>
+                                            </div>
+                                        </h:column>
+                                    </h:panelGrid>
+                                </div>
+                                <div id="detalhe-centro-bottom-esquerda-avaliacao" class="detalhe-centro-bottom-esquerda-panel-texto">
+                                    Média geral de avaliações:
+                                    <p:outputLabel value="#{detalhesVagaBean.vaga.mediaAvaliacoes}">
+                                        <f:convertNumber pattern="##.##"/>
+                                    </p:outputLabel>
+                                <br/>
+                                    Quantidade total de avaliações:
+                                    <p:outputLabel value="#{detalhesVagaBean.vaga.qtAvaliacoes}"/>
+                                </div>
+                                <div id="detalhe-centro-bottom-esquerda-botao">
+                                    <p:commandButton value="Reservar" action="#{detalhesVagaBean.reservar()}" ajax="false" />
+                                </div>
+                            </div>
+                            <div id="detalhe-centro-bottom-direita">
+                                <p:dataTable value="#{detalhesVagaBean.vaga.servicos}" var="servico" class="table-servicos">
+                                    <p:column headerText="Serviços Disponíveis">
+                                        <p:outputLabel value="#{servico.descricao}"/>
+                                    </p:column>
+
+                                </p:dataTable>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="detalhe-direita"> 
+                        T
+                    </div>
+                </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

@@ -8,13 +8,14 @@ package br.com.hospedagem.RN;
 import br.com.hospedagem.controller.login.SessionUtil;
 import br.com.hospedagem.dao.core.DAOFactory;
 import br.com.hospedagem.dao.core.ServicoDAO;
-import br.com.hospedagem.dao.core.VagaDAO;
+import br.com.hospedagem.dao.jpa.JPAHistoricoVagaDAO;
 import br.com.hospedagem.dao.jpa.JPAVagaDAO;
+import br.com.hospedagem.model.HistoricoVaga;
 import br.com.hospedagem.model.Pessoa;
 import br.com.hospedagem.model.Servico;
 import br.com.hospedagem.model.Vaga;
-import br.com.hospedagem.util.UsuarioAtual;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,14 +26,23 @@ public class CadastroVagaRN {
     
     private JPAVagaDAO vagaDAO = new JPAVagaDAO();
     private ServicoDAO servicoDAO;
+    private JPAHistoricoVagaDAO historicoDAO;
 
     public CadastroVagaRN() {
+        historicoDAO = new JPAHistoricoVagaDAO();
     }
     
     public Vaga salvar(Vaga vaga){
-        vaga.setDono((Pessoa) SessionUtil.getParam("usuario"));
+        Pessoa p = (Pessoa) SessionUtil.getParam("usuario");
+        if(historicoDAO.buscarHistoricoVagaPorHospedeiro(vaga, p) == null){
+            Date data = new Date();
+            HistoricoVaga historico = new HistoricoVaga(vaga, p, 2, data);
+            vaga.addHistorico(historico);
+        }
+        vaga.setDono(p);
         return vagaDAO.salvar(vaga);
     }
+    
     
     public List<Servico> carregaServicos(){
         servicoDAO = DAOFactory.getServicoDAO();

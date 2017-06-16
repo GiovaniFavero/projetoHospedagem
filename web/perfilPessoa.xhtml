@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet library="css" name="estilos.css" />
+    </h:head>
+    <h:body>
+        <ui:composition template="template.xhtml">
+            <ui:define name="titulo">Perfil Pessoa</ui:define>
+            <ui:define name="conteudo" >
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="Nome" class="text-alinhado"/>
+                        <p:outputLabel id="nomePessoa" value="#{perfilPessoaBean.pessoa.nome}"/>
+                        
+                        <p:outputLabel value="Data de Nascimento"/>
+                        <p:outputLabel id="dataNasc" value="#{perfilPessoaBean.pessoa.dataNasc}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </p:outputLabel>
+                        
+                        <p:outputLabel value="Profissão"/>
+                        <p:outputLabel id="profissaoPessoa" value="#{perfilPessoaBean.pessoa.profissao}"/>
+
+                    </p:panelGrid>
+                <h2><p:outputLabel value="Hospedagens Realizadas"/></h2>
+                <h:form>
+                    <p:dataTable id="vagas" var="vaga" value="#{perfilPessoaBean.vagasModel}">
+                        <p:column headerText="Título" class="text-alinhado">
+                            <h:outputText value="#{vaga.vaga.titulo}" />
+                        </p:column>
+                        
+                        <p:column headerText="Tipo" class="text-alinhado">
+                            <h:outputText value="#{perfilPessoaBean.getTipo(vaga)}" />
+                        </p:column>
+                        
+                        <p:column headerText="Data" class="text-alinhado">
+                            <h:outputText value="#{vaga.dataTransacao}" >
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </h:outputText>
+                        </p:column>
+                                              
+                        <p:column headerText="Ações" class="text-alinhado">
+                            <p:commandButton value="Vizualizar" action="#{perfilPessoaBean.vizualizar(vaga.vaga)}" ajax="false" />
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+                <h2><p:outputLabel value="Avaliações Realizadas/Recebidas"/></h2>
+                <h:form>
+                    <p:dataTable id="vagas" var="avaliacao" value="#{perfilPessoaBean.avaliacoesModel}">
+                        <p:column headerText="Título Vaga" class="text-alinhado">
+                            <h:outputText value="#{avaliacao.vaga.titulo}" />
+                        </p:column>
+                        
+                        <p:column headerText="Nota Atribuida" class="text-alinhado">
+                            <h:outputText value="#{avaliacao.valor}" />
+                        </p:column>
+                        
+                        <p:column headerText="Papel" class="text-alinhado">
+                            <h:outputText value="#{perfilPessoaBean.getPapelAvaliacao(avaliacao)}" />
+                        </p:column>
+                        
+                        <p:column headerText="Avaliador" class="text-alinhado">
+                            <h:outputText value="#{avaliacao.avaliador.nome}" />
+                        </p:column>
+                        
+                        <p:column headerText="Ações" class="text-alinhado">
+                            <p:commandButton value="Vizualizar Vaga Hospedagem" action="#{perfilPessoaBean.vizualizar(avaliacao.vaga)}" ajax="false" />
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

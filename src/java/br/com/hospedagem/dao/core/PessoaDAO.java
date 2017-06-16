@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface PessoaDAO {
     
-    public void salvar(Pessoa p);
+    public void salvar(Pessoa p) throws Exception ;
     public void remover(Pessoa p);
     public List<Pessoa> buscarTodos() throws Exception;
     public Pessoa buscar(Long id);

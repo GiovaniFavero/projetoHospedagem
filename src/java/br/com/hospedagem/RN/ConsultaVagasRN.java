@@ -19,17 +19,23 @@ public class ConsultaVagasRN {
     
     JPAVagaDAO vagaDAO = (JPAVagaDAO) DAOFactory.getVagaDAO();
     
-    public List<Vaga> buscar(String cidade, Date periodoDe, Date periodoAte, int avaliacao){
-        
-        return vagaDAO.buscaPersonalizada(cidade, periodoDe, periodoAte, avaliacao);
-    }
-    
-    public List<Vaga> buscarTodos(){
-        return vagaDAO.buscarTodos();
+    public List<Vaga> pesquisar(String tipoConsulta, String cidade, Date periodoDe, Date periodoAte, int avaliacaoMinima){
+        if(tipoConsulta.equals("0")){
+            return this.buscarVagasDisponiveis();
+        }else if(tipoConsulta.equals("1")){
+            return vagaDAO.buscarVagasPorCidade(cidade);
+        }else if(tipoConsulta.equals("2")){
+            return vagaDAO.buscarVagasPorPeriodo(periodoDe, periodoAte);
+        }else{
+            return vagaDAO.buscarVagasPorAvaliacaoMinima(avaliacaoMinima);
+        }      
     }
     
     public List<Vaga> buscarVagasDisponiveis(){
         return vagaDAO.buscarVagasDisponíveis();
     }
     
+    
+    
 }
+

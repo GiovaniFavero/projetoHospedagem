@@ -2,6 +2,8 @@ package br.com.hospedagem.controller.login;
 
 
 import java.io.IOException;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -36,6 +38,8 @@ public class FiltroLogin implements Filter {
                 || (requisicao.getRequestURI().endsWith("telaLogin.xhtml"))
                 || (requisicao.getRequestURI().endsWith("cadastroPessoa.xhtml"))
                 || (requisicao.getRequestURI().endsWith("index.xhtml"))
+                || (requisicao.getRequestURI().endsWith("detalhesVaga.xhtml"))
+                || (requisicao.getRequestURI().endsWith("perfilPessoa.xhtml"))
                 || (requisicao.getRequestURI().contains("javax.faces.resource/"))) {
 
             chain.doFilter(request, response);

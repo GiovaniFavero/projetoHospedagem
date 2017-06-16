@@ -7,20 +7,20 @@ package br.com.hospedagem.model;
 
 import java.io.Serializable;
 import javax.persistence.Column;
-import javax.persistence.ColumnResult;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author Favero
  */
 @Entity
+@Table(name = "avaliacoes")
 public class Avaliacao implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -71,5 +71,31 @@ public class Avaliacao implements Serializable {
     public String toString() {
         return "br.com.hospedagem.model.Avaliacao[ id=" + id + " ]";
     }
+
+    public int getValor() {
+        return valor;
+    }
+
+    public void setValor(int valor) {
+        this.valor = valor;
+    }
+
+    public Pessoa getAvaliador() {
+        return avaliador;
+    }
+
+    public void setAvaliador(Pessoa avaliador) {
+        this.avaliador = avaliador;
+    }
+
+    public Vaga getVaga() {
+        return vaga;
+    }
+
+    public void setVaga(Vaga vaga) {
+        this.vaga = vaga;
+    }
+ 
+    
     
 }

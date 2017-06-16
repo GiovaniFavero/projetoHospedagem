@@ -11,7 +11,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
 /**
@@ -26,7 +25,7 @@ public class JPAPessoaDAO implements PessoaDAO{
     }
 
     @Override
-    public void salvar(Pessoa p) {
+    public void salvar(Pessoa p) throws Exception {
         EntityManager em = null;
         try{
              em = this.getEntityManager();
@@ -34,7 +33,7 @@ public class JPAPessoaDAO implements PessoaDAO{
              em.persist(p);
              em.getTransaction().commit();
         }catch(Exception e){
-            e.printStackTrace(); 
+            throw new Exception("E-mail já cadastrado");
         }finally{
             if(em != null){
                 em.close();
@@ -109,4 +108,6 @@ public class JPAPessoaDAO implements PessoaDAO{
         }
         return null;
     }
+    
+    
 }

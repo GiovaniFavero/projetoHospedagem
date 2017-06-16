@@ -26,8 +26,11 @@ and open the template in the editor.
                 <p:menubar id="barraMenu" style="text-align:center !important;">
                     <p:menuitem value="Início" outcome="index.xhtml" icon="ui-icon-home" ></p:menuitem>
                     <p:submenu label="Vagas" icon="ui-icon-star">
-                        <p:menuitem value="Busca Avançada" outcome="consultaVagas.xhtml"></p:menuitem>
                         <p:menuitem value="Cadastrar Vaga" outcome="cadastroVaga.xhtml"></p:menuitem>
+                        <p:menuitem value="Minhas Reservas" outcome="minhasReservas.xhtml"></p:menuitem>
+                    </p:submenu>
+                    <p:submenu label="Perfil Usuario" icon="ui-icon-star">
+                        <p:menuitem value="Cadastrar/Editar Perfil" outcome="cadastroPessoa.xhtml"></p:menuitem>
                     </p:submenu>
                     <f:facet name="options">
                         <p:commandLink type="button" value="#{templateBean.botao}" action="#{templateBean.acao()}"/>
@@ -36,7 +39,7 @@ and open the template in the editor.
             </h:form>
         </div>
         <div id="conteudo">
-            
+            <p:growl id="growl" showDetail="true" sticky="false" life="4000" />
             <ui:insert name="conteudo"/>
         </div>
         

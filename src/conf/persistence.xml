@@ -6,6 +6,7 @@
     <class>br.com.hospedagem.model.Vaga</class>
     <class>br.com.hospedagem.model.Servico</class>
     <class>br.com.hospedagem.model.Avaliacao</class>
+    <class>br.com.hospedagem.model.HistoricoVaga</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/hospedagem"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>

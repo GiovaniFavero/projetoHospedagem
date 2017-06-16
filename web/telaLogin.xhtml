@@ -17,15 +17,14 @@
             <ui:define name="conteudo" >
                 <div id="login">
                     <h:form>
-                        <p:panelGrid columns="3">
+                        <p:growl id="growl" showDetail="true" sticky="false" life="4000" />
+                        <p:panelGrid columns="2">
                             <p:outputLabel value="E-mail"/>
                             <p:inputText id="emailPessoa" value="#{telaLoginBean.email}"
                                          required="true" requiredMessage="Campo Obrigatório"/>
-                            <p:message for="emailPessoa"/>
                             <p:outputLabel value="Senha"/>
                             <p:password id="senhaPessoa" value="#{telaLoginBean.senha}" 
                                         required="true" requiredMessage="Senha Obrigatória"/>
-                            <p:message for="senhaPessoa"/>
                             <p:commandButton value="Entrar" action="#{telaLoginBean.login()}" update="messages"/>
                         </p:panelGrid>
                         <p:outputLabel value="Ainda não é cadastrado?"/>

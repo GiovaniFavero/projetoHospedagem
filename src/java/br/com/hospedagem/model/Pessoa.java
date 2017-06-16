@@ -6,6 +6,7 @@
 package br.com.hospedagem.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
@@ -13,6 +14,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -57,6 +61,9 @@ public class Pessoa implements Serializable {
     
     @OneToMany(mappedBy = "dono")
     private List<Vaga> vagasProprias;
+    
+    @OneToMany(mappedBy = "pessoa")
+    private List<HistoricoVaga> hisoticoVagas = new ArrayList<>();
 
     public Pessoa(String nome, Date dataNasc, String telefone, String email, String profissao, String senha) {
         this.nome = nome;
@@ -69,9 +76,20 @@ public class Pessoa implements Serializable {
 
     public Pessoa() {
     }
-    
-    
 
+    public List<Avaliacao> getAvaliacoes() {
+        return avaliacoes;
+    }
+
+    public List<Vaga> getVagasProprias() {
+        return vagasProprias;
+    }
+
+    public List<HistoricoVaga> getHisoticoVagas() {
+        return hisoticoVagas;
+    }
+    
+    
     public String getSenha() {
         return senha;
     }

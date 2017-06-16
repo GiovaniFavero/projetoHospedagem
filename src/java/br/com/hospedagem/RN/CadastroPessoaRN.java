@@ -21,8 +21,13 @@ public class CadastroPessoaRN {
         pessoaDAO = DAOFactory.getPessoaDAO();
     }
         
-    public void salvar(Pessoa p){
-        pessoaDAO.salvar(p);
+    public void salvar(Pessoa p) throws Exception{
+        try{
+            pessoaDAO.salvar(p);
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+        
     }
     
 }

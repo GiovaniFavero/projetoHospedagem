@@ -14,26 +14,24 @@
             <ui:define name="titulo">Cadastro Vaga</ui:define>
             <ui:define name="conteudo" >
                 <h:form>
-                    <p:panelGrid columns="3">
+                    <p:growl id="growl" showDetail="true" sticky="false" life="4000" />
+                    <p:panelGrid id="cadastro" columns="2">
                         <p:outputLabel value="Titulo"/>
                         <p:inputText id="tituloVaga" size="110" value="#{cadastroVagaBean.vaga.titulo}" 
-                                     required="true" requiredMessage="Campo Obrigatório"/>
-                        <p:message for="tituloVaga"/>
+                                     required="true" requiredMessage="Campo título Obrigatório"/>
                         
                         <p:outputLabel value="Descrição"/>
                         <p:inputText id="descVaga" size="110" value="#{cadastroVagaBean.vaga.descricao}" 
-                                     required="true" requiredMessage="Campo Obrigatório"/>
-                        <p:message for="descVaga"/>
+                                     required="true" requiredMessage="Campo descrição Obrigatório"/>
                         
                         <p:outputLabel value="Valor diário"/>
                         <p:inputNumber id="valorVaga" size="15" value="#{cadastroVagaBean.vaga.valor}"
-                                       required="true" requiredMessage="Campo Obrigatório"/>
-                        <p:message for="valorVaga"/>
+                                       required="true" requiredMessage="Campo valor Obrigatório"/>
                         
                         <p:outputLabel value="Capacidade"/>
                         <p:inputNumber id="capVaga" size="15" value="#{cadastroVagaBean.vaga.capacidade}" 
-                                       required="true" requiredMessage="Campo Obrigatório" placeholder="Nr. de pessoas"/>
-                        <p:message for="capVaga"/>
+                                       required="true" requiredMessage="Campo capacidade Obrigatório" 
+                                       placeholder="Nr. de pessoas"/>
                         
                         <p:outputLabel value="Serviços inclusos"/>
                         <p:selectManyCheckbox id="servicosVaga" value="#{cadastroVagaBean.vaga.servicos}">
@@ -42,30 +40,49 @@
                                            itemValue="#{servico}" itemLabel="#{servico.descricao}"/>
                             
                         </p:selectManyCheckbox >
-                        <p:message for="servicosVaga"/>
                         
                         <p:outputLabel value="Regras"/>
-                        <p:inputText id="regrasVaga" size="110" value="#{cadastroVagaBean.vaga.regras}"
-                                     required="true" requiredMessage="Campo Obrigatório"/>
-                        <p:message for="regrasVaga"/>
+                        <p:inputText id="regrasVaga" size="110" value="#{cadastroVagaBean.vaga.regras}"/>
                         
+                        <p:outputLabel value="Localização"/>
+                        <p:inputText id="localizacao" size="110" value="#{cadastroVagaBean.vaga.localizacao}"
+                                     required="true" requiredMessage="Campo localização Obrigatório"/>
+                        
+                        <p:outputLabel value="Cidade"/>
+                        <p:inputText id="cidade" size="110" value="#{cadastroVagaBean.vaga.cidade}"
+                                     required="true" requiredMessage="Campo cidade Obrigatório"/>
+                        
+                        <p:outputLabel value="Período de Disponibilidade"/>
+                        <p:column>
+                            <p:calendar id="periodoDe" value="#{cadastroVagaBean.vaga.periodoInicial}" pattern="dd/MM/yyyy"
+                                        required="true" requiredMessage="Período Inicial deve ser preenchido">
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </p:calendar>
+                            Até
+                            <p:calendar id="periodoAte" value="#{cadastroVagaBean.vaga.periodoFinal}" pattern="dd/MM/yyyy">
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </p:calendar>
+                        </p:column>
                         <p:outputLabel value="Reservado"/>
                         <p:selectBooleanCheckbox value="#{cadastroVagaBean.vaga.reservado}"/>  
-                        <p:outputLabel value=""/>
                         <p:outputLabel value="Ativo"/>
                         <p:selectBooleanCheckbox value="#{cadastroVagaBean.vaga.ativo}"/>  
-                        <p:outputLabel value=""/>
-                        <p:commandButton value="Salvar" action="#{cadastroVagaBean.salvar()}" ajax="false"/>
+  
+                        <p:commandButton value="Salvar" action="#{cadastroVagaBean.salvar()}" ajax="false"
+                                         actionListener="#{cadastroVagaBean.saveMessage}" update="growl vagas"
+                                         id="salvar"/>
                     </p:panelGrid>
                 </h:form>
                 <h:form>
-                    <p:dataTable var="vaga" value="#{cadastroVagaBean.vagasModel}">
+                    <p:dataTable id="vagas" var="vaga" value="#{cadastroVagaBean.vagasModel}">
                         <p:column headerText="Título" class="text-alinhado">
                             <h:outputText value="#{vaga.titulo}" />
                         </p:column>
 
                         <p:column headerText="Valor" class="text-alinhado">
-                            <h:outputText value="#{vaga.valor}" />
+                            <h:outputText value="#{vaga.valor}" >
+                                <f:convertNumber type="currency" currencySymbol="R$"/>
+                            </h:outputText>
                         </p:column>
 
                         <p:column headerText="Capacidade" class="text-alinhado">
@@ -81,8 +98,8 @@
                         </p:column>
                         
                         <p:column headerText="Ações" class="text-alinhado">
-                            <p:commandButton value="Alterar" action="#{cadastroVagaBean.alterar()}" ajax="false" />
-                            <p:commandButton value="Excluir" action="#{cadastroVagaBean.excluir()}" ajax="false"/>
+                            <p:commandButton value="Alterar" action="#{cadastroVagaBean.alterar()}" ajax="false" update="cadastro"/>
+                            <p:commandButton value="Excluir" action="#{cadastroVagaBean.excluir()}" ajax="false" />
                         </p:column>
                     </p:dataTable>
                 </h:form>
