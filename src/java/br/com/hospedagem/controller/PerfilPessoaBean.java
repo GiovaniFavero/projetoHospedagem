@@ -11,7 +11,6 @@ import br.com.hospedagem.model.Avaliacao;
 import br.com.hospedagem.model.HistoricoVaga;
 import br.com.hospedagem.model.Pessoa;
 import br.com.hospedagem.model.Vaga;
-import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;

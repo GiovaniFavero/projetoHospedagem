@@ -8,9 +8,11 @@ package br.com.hospedagem.controller;
 import br.com.hospedagem.RN.CadastroVagaRN;
 import br.com.hospedagem.model.Servico;
 import br.com.hospedagem.model.Vaga;
+import com.sun.faces.action.RequestMapping;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
@@ -21,7 +23,7 @@ import javax.faces.model.ListDataModel;
  * @author Favero
  */
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class CadastroVagaBean {
     
     private Vaga vaga = new Vaga();

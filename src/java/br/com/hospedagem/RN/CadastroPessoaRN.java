@@ -9,10 +9,6 @@ import br.com.hospedagem.dao.core.DAOFactory;
 import br.com.hospedagem.dao.core.PessoaDAO;
 import br.com.hospedagem.model.Pessoa;
 
-/**
- *
- * @author Favero
- */
 public class CadastroPessoaRN {
     
     private PessoaDAO pessoaDAO;

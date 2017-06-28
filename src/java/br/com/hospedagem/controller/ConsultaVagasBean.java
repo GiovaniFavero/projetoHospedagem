@@ -49,7 +49,7 @@ public class ConsultaVagasBean {
     
     public String pesquisar(){
         this.vagasResult = this.consultaVagasRn.pesquisar(tipoConsulta, cidade, periodoDe, periodoAte, avaliacaoMinima);
-        return "consultaVagas.xhtml";
+        return "index.xhtml";
     }
     
     public void setTipoConsulta(AjaxBehaviorEvent event){

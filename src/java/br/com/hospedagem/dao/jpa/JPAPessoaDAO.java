@@ -30,7 +30,7 @@ public class JPAPessoaDAO implements PessoaDAO{
         try{
              em = this.getEntityManager();
              em.getTransaction().begin();
-             em.persist(p);
+             em.merge(p);
              em.getTransaction().commit();
         }catch(Exception e){
             throw new Exception("E-mail já cadastrado");
